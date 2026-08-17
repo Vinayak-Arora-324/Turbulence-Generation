@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[   1373987,      23066]
-NotebookOptionsPosition[   1372937,      23042]
-NotebookOutlinePosition[   1373328,      23058]
-CellTagsIndexPosition[   1373285,      23055]
+NotebookDataLength[   1386438,      23371]
+NotebookOptionsPosition[   1385054,      23342]
+NotebookOutlinePosition[   1385445,      23358]
+CellTagsIndexPosition[   1385402,      23355]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -23038,7 +23038,307 @@ Cell[BoxData[
  CellChangeTimes->{{3.9959413829968023`*^9, 3.995941390376505*^9}, {
   3.995941463237336*^9, 3.9959414687785273`*^9}, {3.9959415396914463`*^9, 
   3.995941544448037*^9}},ExpressionUUID->"e7c14860-2fb2-4a68-9310-\
-5620b0425bfb"]
+5620b0425bfb"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.995943057554082*^9},ExpressionUUID->"6654ec5a-fdac-4b1a-bb6f-\
+27314d788dd1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", "Export"}]}]}]}]}], " ", "current", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"experiment", "--"}], "--"}], "--"}], "--"}], "--"}]}], 
+   "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"runParameters", "=", 
+     RowBox[{"<|", 
+      RowBox[{
+       RowBox[{"\"\<Seed\>\"", "->", "20260817"}], ",", 
+       RowBox[{"\"\<Length\>\"", "->", 
+        RowBox[{"Length", "[", 
+         RowBox[{"market", "[", "\"\<Returns\>\"", "]"}], "]"}]}], ",", 
+       RowBox[{"\"\<Levels\>\"", "->", "10"}], ",", 
+       RowBox[{"\"\<Intermittency\>\"", "->", "0.38"}], ",", 
+       RowBox[{"\"\<Persistence\>\"", "->", "0.72"}], ",", 
+       RowBox[{"\"\<AnnualizedVolatility\>\"", "->", "0.20"}], ",", 
+       RowBox[{"\"\<InitialPrice\>\"", "->", "100."}]}], "|>"}]}], ";"}], 
+   "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"runID", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"\"\<seed-\>\"", ",", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"runParameters", "[", "\"\<Seed\>\"", "]"}], "]"}], 
+       ",", "\"\<-\>\"", ",", 
+       RowBox[{"DateString", "[", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Year\>\"", ",", "\"\<Month\>\"", ",", "\"\<Day\>\"", 
+          ",", "\"\<-\>\"", ",", "\"\<Hour\>\"", ",", "\"\<Minute\>\"", 
+          ",", "\"\<Second\>\""}], "}"}], "]"}]}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"exportDirectory", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<exports\>\"", ",", 
+        "runID"}], "}"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"CreateDirectory", "[", 
+     RowBox[{"exportDirectory", ",", 
+      RowBox[{"CreateIntermediateDirectories", "->", "True"}]}], "]"}], ";"}],
+    "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Exact", " ", "Wolfram"}], "-", 
+      RowBox[{"format", " ", "result"}]}], ",", 
+     RowBox[{"including", " ", "ScaleFields"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"wxfFile", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"exportDirectory", ",", "\"\<market-result.wxf\>\""}], "}"}], 
+      "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"wxfFile", ",", "market", ",", "\"\<WXF\>\""}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Portable", " ", "tabular", " ", "representation"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"csvData", "=", 
+     RowBox[{"Prepend", "[", 
+      RowBox[{
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{"Length", "[", 
+            RowBox[{"market", "[", "\"\<Returns\>\"", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"market", "[", "\"\<Returns\>\"", "]"}], ",", 
+          RowBox[{"market", "[", "\"\<Volatility\>\"", "]"}], ",", 
+          RowBox[{"market", "[", "\"\<LogPrices\>\"", "]"}], ",", 
+          RowBox[{"market", "[", "\"\<Prices\>\"", "]"}]}], "}"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Time\>\"", ",", "\"\<Return\>\"", 
+         ",", "\"\<Volatility\>\"", ",", "\"\<LogPrice\>\"", 
+         ",", "\"\<Price\>\""}], "}"}]}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"csvFile", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"exportDirectory", ",", "\"\<market-series.csv\>\""}], "}"}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"csvFile", ",", "csvData", ",", "\"\<CSV\>\""}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Save", " ", "the", " ", "generator", " ", "used", " ", "for", " ", 
+     "this", " ", "run"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"definitionFile", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"exportDirectory", ",", "\"\<generator-definition.wl\>\""}], 
+       "}"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Save", "[", 
+     RowBox[{"definitionFile", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "caStep", ",", "caUniform", ",", "caGaussian", ",", "standardize", ",",
+         "ar1", ",", "dyadicField", ",", "generateMarket"}], "}"}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Summary", " ", "statistics"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"returns", "=", 
+     RowBox[{"market", "[", "\"\<Returns\>\"", "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"summary", "=", 
+     RowBox[{"<|", 
+      RowBox[{
+       RowBox[{"\"\<MeanReturn\>\"", "->", 
+        RowBox[{"Mean", "[", "returns", "]"}]}], ",", 
+       RowBox[{"\"\<ReturnStandardDeviation\>\"", "->", 
+        RowBox[{"StandardDeviation", "[", "returns", "]"}]}], ",", 
+       RowBox[{"\"\<ReturnSkewness\>\"", "->", 
+        RowBox[{"Skewness", "[", "returns", "]"}]}], ",", 
+       RowBox[{"\"\<ReturnKurtosis\>\"", "->", 
+        RowBox[{"Kurtosis", "[", "returns", "]"}]}], ",", 
+       RowBox[{"\"\<ExcessKurtosis\>\"", "->", 
+        RowBox[{
+         RowBox[{"Kurtosis", "[", "returns", "]"}], "-", "3"}]}], ",", 
+       RowBox[{"\"\<MinimumReturn\>\"", "->", 
+        RowBox[{"Min", "[", "returns", "]"}]}], ",", 
+       RowBox[{"\"\<MaximumReturn\>\"", "->", 
+        RowBox[{"Max", "[", "returns", "]"}]}], ",", 
+       RowBox[{"\"\<AbsoluteReturnLag1Correlation\>\"", "->", 
+        RowBox[{"Correlation", "[", 
+         RowBox[{
+          RowBox[{"Most", "[", 
+           RowBox[{"Abs", "[", "returns", "]"}], "]"}], ",", 
+          RowBox[{"Rest", "[", 
+           RowBox[{"Abs", "[", "returns", "]"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"\"\<FinalPrice\>\"", "->", 
+        RowBox[{"Last", "[", 
+         RowBox[{"market", "[", "\"\<Prices\>\"", "]"}], "]"}]}], ",", 
+       RowBox[{"\"\<MinimumPrice\>\"", "->", 
+        RowBox[{"Min", "[", 
+         RowBox[{"market", "[", "\"\<Prices\>\"", "]"}], "]"}]}], ",", 
+       RowBox[{"\"\<MaximumPrice\>\"", "->", 
+        RowBox[{"Max", "[", 
+         RowBox[{"market", "[", "\"\<Prices\>\"", "]"}], "]"}]}]}], "|>"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"exportDirectory", ",", "\"\<summary.json\>\""}], "}"}], 
+       "]"}], ",", "summary", ",", "\"\<JSON\>\""}], "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"metadata", "=", 
+     RowBox[{"<|", 
+      RowBox[{
+       RowBox[{"\"\<RunID\>\"", "->", "runID"}], ",", 
+       RowBox[{"\"\<ExportedAt\>\"", "->", 
+        RowBox[{"DateString", "[", "\"\<ISODateTime\>\"", "]"}]}], ",", 
+       RowBox[{"\"\<WolframVersion\>\"", "->", "$Version"}], ",", 
+       RowBox[{"\"\<SystemID\>\"", "->", "$SystemID"}], ",", 
+       RowBox[{"\"\<Parameters\>\"", "->", "runParameters"}]}], "|>"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"exportDirectory", ",", "\"\<metadata.json\>\""}], "}"}], 
+       "]"}], ",", "metadata", ",", "\"\<JSON\>\""}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Export", " ", "plots"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pricePlot", "=", 
+     RowBox[{"ListLinePlot", "[", 
+      RowBox[{
+       RowBox[{"market", "[", "\"\<Prices\>\"", "]"}], ",", 
+       RowBox[{"Frame", "->", "True"}], ",", 
+       RowBox[{"FrameLabel", "->", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Time\>\"", ",", "\"\<Synthetic price\>\""}], "}"}]}], ",", 
+       RowBox[{"PlotTheme", "->", "\"\<Scientific\>\""}], ",", 
+       RowBox[{"ImageSize", "->", "Large"}]}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dynamicsPlot", "=", 
+     RowBox[{"GraphicsGrid", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"ListLinePlot", "[", 
+           RowBox[{
+            RowBox[{"Take", "[", 
+             RowBox[{
+              RowBox[{"market", "[", "\"\<Returns\>\"", "]"}], ",", 
+              RowBox[{"UpTo", "[", "2000", "]"}]}], "]"}], ",", 
+            RowBox[{"PlotRange", "->", "All"}], ",", 
+            RowBox[{"Frame", "->", "True"}], ",", 
+            RowBox[{"FrameLabel", "->", 
+             RowBox[{"{", 
+              RowBox[{"\"\<Time\>\"", ",", "\"\<Return\>\""}], "}"}]}]}], 
+           "]"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"ListLinePlot", "[", 
+           RowBox[{
+            RowBox[{"Take", "[", 
+             RowBox[{
+              RowBox[{"market", "[", "\"\<Volatility\>\"", "]"}], ",", 
+              RowBox[{"UpTo", "[", "2000", "]"}]}], "]"}], ",", 
+            RowBox[{"PlotRange", "->", "All"}], ",", 
+            RowBox[{"Frame", "->", "True"}], ",", 
+            RowBox[{"FrameLabel", "->", 
+             RowBox[{"{", 
+              RowBox[{"\"\<Time\>\"", ",", "\"\<Volatility\>\""}], "}"}]}]}], 
+           "]"}], "}"}]}], "}"}], ",", 
+       RowBox[{"ImageSize", "->", "Large"}]}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"exportDirectory", ",", "\"\<price-path.png\>\""}], "}"}], 
+       "]"}], ",", "pricePlot", ",", 
+      RowBox[{"ImageResolution", "->", "180"}]}], "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"exportDirectory", ",", "\"\<returns-volatility.png\>\""}], 
+        "}"}], "]"}], ",", "dynamicsPlot", ",", 
+      RowBox[{"ImageResolution", "->", "180"}]}], "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"exportDirectory", ",", "\"\<results.pdf\>\""}], "}"}], "]"}],
+       ",", 
+      RowBox[{"GraphicsColumn", "[", 
+       RowBox[{"{", 
+        RowBox[{"pricePlot", ",", "dynamicsPlot"}], "}"}], "]"}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Integrity", " ", "hashes"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"filesToHash", "=", 
+     RowBox[{"FileNames", "[", 
+      RowBox[{"All", ",", "exportDirectory"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"hashes", "=", 
+     RowBox[{"AssociationMap", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"IntegerString", "[", 
+         RowBox[{
+          RowBox[{"FileHash", "[", 
+           RowBox[{"#", ",", "\"\<SHA256\>\""}], "]"}], ",", "16", ",", 
+          "64"}], "]"}], "&"}], ",", "filesToHash"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"exportDirectory", ",", "\"\<sha256.json\>\""}], "}"}], "]"}],
+       ",", "hashes", ",", "\"\<JSON\>\""}], "]"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SystemOpen", "[", "exportDirectory", "]"}], ";"}], "\n", 
+   "exportDirectory"}]}]], "Input",
+ CellChangeTimes->{{3.9959430606835117`*^9, 3.995943060683527*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"020dfe55-afa7-4c28-ad45-9c9dc1f69730"],
+
+Cell[BoxData["\<\"/home/vinayakarora/Working-Dir/Turbulence/exports/seed-\
+20260817-20260817-131106\"\>"], "Output",
+ CellChangeTimes->{3.995943104456896*^9},
+ CellLabel->"Out[47]=",ExpressionUUID->"acfcde7b-4084-4825-a766-e9d15184a3a6"]
+}, Open  ]]
 },
 WindowSize->{1158, 723.75},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -23067,7 +23367,12 @@ Cell[12049, 309, 1995, 52, 109, "Input",ExpressionUUID->"83e999ae-d59f-49e7-9772
 Cell[14047, 363, 677846, 11307, 695, 526319, 8822, "CachedBoxData", "BoxData", "Output",ExpressionUUID->"5d29bcc9-e3d6-4ea6-95d3-386d0804f875"]
 }, Open  ]],
 Cell[691908, 11673, 680110, 11342, 725, "Input",ExpressionUUID->"85e62f21-2bf0-498c-a1a5-b22013e32639"],
-Cell[1372021, 23017, 912, 23, 73, "Input",ExpressionUUID->"e7c14860-2fb2-4a68-9310-5620b0425bfb"]
+Cell[1372021, 23017, 912, 23, 73, "Input",ExpressionUUID->"e7c14860-2fb2-4a68-9310-5620b0425bfb"],
+Cell[1372936, 23042, 147, 3, 49, "Input",ExpressionUUID->"6654ec5a-fdac-4b1a-bb6f-27314d788dd1"],
+Cell[CellGroupData[{
+Cell[1373108, 23049, 11690, 285, 1351, "Input",ExpressionUUID->"020dfe55-afa7-4c28-ad45-9c9dc1f69730"],
+Cell[1384801, 23336, 237, 3, 33, "Output",ExpressionUUID->"acfcde7b-4084-4825-a766-e9d15184a3a6"]
+}, Open  ]]
 }
 ]
 *)
