@@ -1,0 +1,13 @@
+{
+	"MeanReturn":-5.7604559165371116e-5,
+	"ReturnStandardDeviation":1.2599453108982162e-2,
+	"ReturnSkewness":1.3770719675745152e-2,
+	"ReturnKurtosis":5.307224714452433,
+	"ExcessKurtosis":2.307224714452433,
+	"MinimumReturn":-7.67300566605593e-2,
+	"MaximumReturn":8.122002082507859e-2,
+	"AbsoluteReturnLag1Correlation":0.20937628558951366,
+	"FinalPrice":6.2381804437819774e1,
+	"MinimumPrice":3.68322742512101e1,
+	"MaximumPrice":2.3441509450130857e2
+}
