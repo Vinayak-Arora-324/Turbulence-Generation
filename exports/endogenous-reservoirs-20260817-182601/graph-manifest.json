@@ -1,0 +1,19 @@
+{
+	"ExportedAt":"2026-08-17T18:26:05",
+	"Model":"EndogenousOneDimensionalTurbulence",
+	"Stage":"InteractingMultiscaleReservoirs",
+	"Version":"1.2.0",
+	"Seed":20260817,
+	"Length":8192,
+	"PNGFiles":{
+		"interacting-multiscale-reservoirs":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/interacting-multiscale-reservoirs.png",
+		"capacity-limited-nonlinear-transfer":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/capacity-limited-nonlinear-transfer.png",
+		"forcing-versus-fine-scale-dissipation":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/forcing-versus-fine-scale-dissipation.png"
+	},
+	"PDFFiles":{
+		"interacting-multiscale-reservoirs":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/interacting-multiscale-reservoirs.pdf",
+		"capacity-limited-nonlinear-transfer":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/capacity-limited-nonlinear-transfer.pdf",
+		"forcing-versus-fine-scale-dissipation":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/forcing-versus-fine-scale-dissipation.pdf"
+	},
+	"CombinedPDF":"\/home\/vinayakarora\/Working-Dir\/Turbulence\/exports\/endogenous-reservoirs-20260817-182601\/endogenous-reservoir-results.pdf"
+}
