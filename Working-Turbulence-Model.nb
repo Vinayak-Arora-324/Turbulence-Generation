@@ -1,0 +1,248 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9602,        240]
+NotebookOptionsPosition[      8971,        223]
+NotebookOutlinePosition[      9362,        239]
+CellTagsIndexPosition[      9319,        236]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"We", " ", "will", " ", "start", " ", "with", " ", "gaussian"}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{"GenerateTurbulenceCore", ",", "GaussianMarketAdapter"}], "]"}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "GenerateTurbulenceCore", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{"\"\<RandomMethod\>\"", "->", "\"\<MersenneTwister\>\""}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"GenerateTurbulenceCore", "[", 
+      RowBox[{"seed_Integer", ",", 
+       RowBox[{"length_Integer", "?", "Positive"}], ",", 
+       RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"method", ",", "signal"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"method", "=", 
+         RowBox[{"OptionValue", "[", "\"\<RandomMethod\>\"", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"signal", "=", 
+         RowBox[{"BlockRandom", "[", 
+          RowBox[{
+           RowBox[{"SeedRandom", "[", 
+            RowBox[{"seed", ",", 
+             RowBox[{"Method", "->", "method"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{
+             RowBox[{"NormalDistribution", "[", 
+              RowBox[{"0.", ",", "1."}], "]"}], ",", "length"}], "]"}]}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"<|", 
+         RowBox[{
+          RowBox[{"\"\<Model\>\"", "->", "\"\<GaussianReference\>\""}], ",", 
+          RowBox[{"\"\<Seed\>\"", "->", "seed"}], ",", 
+          RowBox[{"\"\<Length\>\"", "->", "length"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{"Domain", "-", 
+            RowBox[{"neutral", " ", "Gaussian", " ", "signal"}]}], "*)"}], 
+          RowBox[{"\"\<Signal\>\"", "->", "signal"}], ",", 
+          RowBox[{"\"\<Innovations\>\"", "->", "signal"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"Derived", " ", "measurement"}], ",", 
+            RowBox[{"not", " ", "a", " ", "dynamical", " ", "process"}]}], 
+           "*)"}], 
+          RowBox[{"\"\<Activity\>\"", "->", 
+           RowBox[{"signal", "^", "2"}]}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Constant", " ", "by", " ", "definition", " ", "in", " ", "this", " ",
+             "reference", " ", "model"}], "*)"}], 
+          RowBox[{"\"\<ConditionalScale\>\"", "->", 
+           RowBox[{"ConstantArray", "[", 
+            RowBox[{"1.", ",", "length"}], "]"}]}], ",", 
+          RowBox[{"\"\<Parameters\>\"", "->", 
+           RowBox[{"<|", 
+            RowBox[{
+             
+             RowBox[{"\"\<Distribution\>\"", 
+              "->", "\"\<NormalDistribution[0,1]\>\""}], ",", 
+             RowBox[{"\"\<Independent\>\"", "->", "True"}], ",", 
+             RowBox[{"\"\<RandomMethod\>\"", "->", "method"}]}], "|>"}]}]}], 
+         "|>"}]}]}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.995947488129724*^9, 3.995947522020405*^9}, {
+  3.995948279153195*^9, 
+  3.995948281451717*^9}},ExpressionUUID->"87890b96-1199-448b-9a75-\
+cdfd6f86572f"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.99594755657454*^9, 
+  3.995947563843699*^9}},ExpressionUUID->"7b259192-4ef2-446a-a7db-\
+9f748aeb0cc0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Market", " ", "adapter"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "GaussianMarketAdapter", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<InitialPrice\>\"", "->", "100."}], ",", 
+       RowBox[{"\"\<AnnualizedLogDrift\>\"", "->", "0."}], ",", 
+       RowBox[{"\"\<AnnualizedVolatility\>\"", "->", "0.20"}], ",", 
+       RowBox[{"\"\<PeriodsPerYear\>\"", "->", "252"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"GaussianMarketAdapter", "[", 
+      RowBox[{"core_Association", ",", 
+       RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "initialPrice", ",", "annualizedLogDrift", ",", 
+         "annualizedVolatility", ",", "periodsPerYear", ",", "periodDrift", ",",
+          "periodScale", ",", "returns", ",", "prices"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"initialPrice", "=", 
+         RowBox[{"N", "@", 
+          RowBox[{"OptionValue", "[", "\"\<InitialPrice\>\"", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"annualizedLogDrift", "=", 
+         RowBox[{"N", "@", 
+          RowBox[{"OptionValue", "[", "\"\<AnnualizedLogDrift\>\"", "]"}]}]}],
+         ";", "\[IndentingNewLine]", 
+        RowBox[{"annualizedVolatility", "=", 
+         RowBox[{"N", "@", 
+          RowBox[{
+          "OptionValue", "[", "\"\<AnnualizedVolatility\>\"", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"periodsPerYear", "=", 
+         RowBox[{"OptionValue", "[", "\"\<PeriodsPerYear\>\"", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"periodDrift", "=", 
+         RowBox[{"annualizedLogDrift", "/", "periodsPerYear"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"periodScale", "=", 
+         RowBox[{"annualizedVolatility", "/", 
+          RowBox[{"Sqrt", "[", "periodsPerYear", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "No", " ", "sample", " ", "centering", " ", "or", " ", "sample", " ",
+           "rescaling"}], "*)"}], 
+        RowBox[{"returns", "=", 
+         RowBox[{"periodDrift", "+", 
+          RowBox[{"periodScale", " ", 
+           RowBox[{"core", "[", "\"\<Signal\>\"", "]"}]}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"prices", "=", 
+         RowBox[{"Exp", "[", 
+          RowBox[{
+           RowBox[{"Log", "[", "initialPrice", "]"}], "+", 
+           RowBox[{"Accumulate", "[", "returns", "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Join", "[", 
+         RowBox[{"core", ",", 
+          RowBox[{"<|", 
+           RowBox[{
+            RowBox[{"\"\<Adapter\>\"", "->", "\"\<Market\>\""}], ",", 
+            RowBox[{"\"\<Returns\>\"", "->", "returns"}], ",", 
+            RowBox[{"\"\<Prices\>\"", "->", "prices"}], ",", 
+            RowBox[{"(*", 
+             RowBox[{
+             "Flat", " ", "theoretical", " ", "conditional", " ", 
+              "volatility"}], "*)"}], 
+            RowBox[{"\"\<Volatility\>\"", "->", 
+             RowBox[{"ConstantArray", "[", 
+              RowBox[{"periodScale", ",", 
+               RowBox[{"Length", "[", "returns", "]"}]}], "]"}]}], ",", 
+            RowBox[{"\"\<RelativeVolatility\>\"", "->", 
+             RowBox[{"ConstantArray", "[", 
+              RowBox[{"1.", ",", 
+               RowBox[{"Length", "[", "returns", "]"}]}], "]"}]}], ",", 
+            RowBox[{"\"\<MarketParameters\>\"", "->", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<InitialPrice\>\"", "->", "initialPrice"}], ",", 
+               
+               RowBox[{"\"\<AnnualizedLogDrift\>\"", "->", 
+                "annualizedLogDrift"}], ",", 
+               
+               RowBox[{"\"\<AnnualizedVolatility\>\"", "->", 
+                "annualizedVolatility"}], ",", 
+               RowBox[{"\"\<PeriodsPerYear\>\"", "->", "periodsPerYear"}], ",", 
+               RowBox[{"\"\<PeriodScale\>\"", "->", "periodScale"}]}], 
+              "|>"}]}]}], "|>"}]}], "]"}]}]}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.995947530119576*^9, 3.99594756586558*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"333cdbde-26d7-4e6a-8b6b-dda0b177f941"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"gaussianCore", "=", 
+     RowBox[{"GenerateTurbulenceCore", "[", 
+      RowBox[{"20260817", ",", "8192"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"gaussianResult", "=", 
+     RowBox[{"GaussianMarketAdapter", "[", 
+      RowBox[{"gaussianCore", ",", 
+       RowBox[{"\"\<InitialPrice\>\"", "->", "100."}], ",", 
+       RowBox[{"\"\<AnnualizedVolatility\>\"", "->", "0.20"}]}], "]"}]}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{3.9959475716323957`*^9, 
+  3.99594828512145*^9},ExpressionUUID->"b19a15c7-1cfa-43e7-88cd-25eeddae9adf"]
+},
+WindowSize->{1158, 723.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"15.0 for Linux x86 (64-bit) (May 19, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2b53c4e3-6a0f-4be5-9f71-13369f62414a"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 3240, 78, 255, "Input",ExpressionUUID->"87890b96-1199-448b-9a75-cdfd6f86572f"],
+Cell[3797, 100, 205, 4, 69, "Input",ExpressionUUID->"7b259192-4ef2-446a-a7db-9f748aeb0cc0"],
+Cell[4005, 106, 4335, 98, 329, "Input",ExpressionUUID->"333cdbde-26d7-4e6a-8b6b-dda0b177f941"],
+Cell[8343, 206, 624, 15, 69, "Input",ExpressionUUID->"b19a15c7-1cfa-43e7-88cd-25eeddae9adf"]
+}
+]
+*)
+
