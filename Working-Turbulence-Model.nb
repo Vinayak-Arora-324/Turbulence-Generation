@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[      9602,        240]
-NotebookOptionsPosition[      8971,        223]
-NotebookOutlinePosition[      9362,        239]
-CellTagsIndexPosition[      9319,        236]
+NotebookDataLength[     20458,        488]
+NotebookOptionsPosition[     19443,        467]
+NotebookOutlinePosition[     19834,        483]
+CellTagsIndexPosition[     19791,        480]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -94,14 +94,12 @@ Cell[BoxData[
              RowBox[{"\"\<RandomMethod\>\"", "->", "method"}]}], "|>"}]}]}], 
          "|>"}]}]}], "]"}]}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.995947488129724*^9, 3.995947522020405*^9}, {
-  3.995948279153195*^9, 
-  3.995948281451717*^9}},ExpressionUUID->"87890b96-1199-448b-9a75-\
-cdfd6f86572f"],
+  3.995948279153195*^9, 3.995948281451717*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"87890b96-1199-448b-9a75-cdfd6f86572f"],
 
-Cell[BoxData[
- RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
- CellChangeTimes->{{3.99594755657454*^9, 
-  3.995947563843699*^9}},ExpressionUUID->"7b259192-4ef2-446a-a7db-\
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.99594755657454*^9, 3.995947563843699*^9}, 
+   3.995948557762273*^9},ExpressionUUID->"7b259192-4ef2-446a-a7db-\
 9f748aeb0cc0"],
 
 Cell[BoxData[
@@ -202,7 +200,7 @@ Cell[BoxData[
                RowBox[{"\"\<PeriodScale\>\"", "->", "periodScale"}]}], 
               "|>"}]}]}], "|>"}]}], "]"}]}]}], "]"}]}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.995947530119576*^9, 3.99594756586558*^9}},
- CellLabel->"In[4]:=",ExpressionUUID->"333cdbde-26d7-4e6a-8b6b-dda0b177f941"],
+ CellLabel->"In[11]:=",ExpressionUUID->"333cdbde-26d7-4e6a-8b6b-dda0b177f941"],
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
@@ -217,9 +215,255 @@ Cell[BoxData[
       RowBox[{"gaussianCore", ",", 
        RowBox[{"\"\<InitialPrice\>\"", "->", "100."}], ",", 
        RowBox[{"\"\<AnnualizedVolatility\>\"", "->", "0.20"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Now", " ", "adding", " ", "a", " ", "higher", " ", "number", " ", "of", " ",
+      "peaks", " ", "to", " ", "the", " ", "original", " ", "distribution"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ClearAll", "[", "AddIndependentPeakFrequency", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "AddIndependentPeakFrequency", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<PeakProbability\>\"", "->", "0.02"}], ",", 
+       RowBox[{"\"\<PeakAmplification\>\"", "->", "3."}], ",", 
+       RowBox[{"\"\<EventSeed\>\"", "->", "20260818"}], ",", 
+       RowBox[{"\"\<RandomMethod\>\"", "->", "\"\<MersenneTwister\>\""}]}], 
+      "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"AddIndependentPeakFrequency", "[", 
+      RowBox[{"baseCore_Association", ",", 
+       RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "peakProbability", ",", "peakAmplification", ",", "eventSeed", ",", 
+         "randomMethod", ",", "length", ",", "peakIndicator", ",", 
+         "varianceNormalization", ",", "activityMultiplier", ",", 
+         "peakSignal"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"peakProbability", "=", 
+         RowBox[{"OptionValue", "[", "\"\<PeakProbability\>\"", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"peakAmplification", "=", 
+         RowBox[{"N", "@", 
+          RowBox[{"OptionValue", "[", "\"\<PeakAmplification\>\"", "]"}]}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"eventSeed", "=", 
+         RowBox[{"OptionValue", "[", "\"\<EventSeed\>\"", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"randomMethod", "=", 
+         RowBox[{"OptionValue", "[", "\"\<RandomMethod\>\"", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"length", "=", 
+         RowBox[{"baseCore", "[", "\"\<Length\>\"", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"peakIndicator", "=", 
+         RowBox[{"BlockRandom", "[", 
+          RowBox[{
+           RowBox[{"SeedRandom", "[", 
+            RowBox[{"eventSeed", ",", 
+             RowBox[{"Method", "->", "randomMethod"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{
+             RowBox[{"BernoulliDistribution", "[", "peakProbability", "]"}], ",",
+              "length"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"E", "[", 
+           RowBox[{"activityMultiplier", "^", "2"}], "]"}], "=", 
+          RowBox[{
+          "1.", " ", "This", " ", "preserves", " ", "the", " ", "theoretical",
+            " ", "unconditional", " ", "variance", " ", "without", " ", 
+           "centering", " ", "or", " ", "normalizing", " ", "the", " ", 
+           "generated", " ", 
+           RowBox[{"sample", "."}]}]}], "*)"}], 
+        RowBox[{"varianceNormalization", "=", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1.", "-", "peakProbability"}], ")"}], "+", 
+           RowBox[{"peakProbability", " ", 
+            RowBox[{"peakAmplification", "^", "2"}]}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"activityMultiplier", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"1.", "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"peakAmplification", "-", "1."}], ")"}], " ", 
+             "peakIndicator"}]}], ")"}], "/", "varianceNormalization"}]}], ";",
+         "\[IndentingNewLine]", 
+        RowBox[{"peakSignal", "=", 
+         RowBox[{"activityMultiplier", " ", 
+          RowBox[{"baseCore", "[", "\"\<Signal\>\"", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Join", "[", 
+         RowBox[{"baseCore", ",", 
+          RowBox[{"<|", 
+           RowBox[{
+            
+            RowBox[{"\"\<Model\>\"", 
+             "->", "\"\<OneDimensionalTurbulence\>\""}], ",", 
+            
+            RowBox[{"\"\<Stage\>\"", 
+             "->", "\"\<IndependentPeakFrequency\>\""}], ",", 
+            RowBox[{"\"\<Version\>\"", "->", "\"\<0.2\>\""}], ",", 
+            RowBox[{"\"\<ParentStage\>\"", "->", "\"\<GaussianBase\>\""}], ",", 
+            RowBox[{"\"\<GaussianSource\>\"", "->", 
+             RowBox[{"baseCore", "[", "\"\<Signal\>\"", "]"}]}], ",", 
+            RowBox[{"\"\<Signal\>\"", "->", "peakSignal"}], ",", 
+            RowBox[{"\"\<Activity\>\"", "->", 
+             RowBox[{"peakSignal", "^", "2"}]}], ",", 
+            RowBox[{"\"\<PeakIndicator\>\"", "->", "peakIndicator"}], ",", 
+            RowBox[{"\"\<ConditionalScale\>\"", "->", "activityMultiplier"}], 
+            ",", 
+            RowBox[{"\"\<Parameters\>\"", "->", 
+             RowBox[{"Join", "[", 
+              RowBox[{
+               RowBox[{"baseCore", "[", "\"\<Parameters\>\"", "]"}], ",", 
+               RowBox[{"<|", 
+                RowBox[{
+                 RowBox[{"\"\<PeakProbability\>\"", "->", "peakProbability"}],
+                  ",", 
+                 
+                 RowBox[{"\"\<PeakAmplification\>\"", "->", 
+                  "peakAmplification"}], ",", 
+                 RowBox[{"\"\<EventSeed\>\"", "->", "eventSeed"}], ",", 
+                 
+                 RowBox[{"\"\<VarianceNormalization\>\"", "->", 
+                  "varianceNormalization"}], ",", 
+                 RowBox[{"\"\<TheoreticalSignalVariance\>\"", "->", "1."}]}], 
+                "|>"}]}], "]"}]}]}], "|>"}]}], "]"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "New", " ", "Stage", " ", "using", " ", "separate", " ", "variables"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"peakFrequencyProbability", "=", "0.02"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"peakFrequencyAmplification", "=", "3."}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"peakFrequencyEventSeed", "=", "20260818"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"peakFrequencyCore", "=", 
+     RowBox[{"AddIndependentPeakFrequency", "[", 
+      RowBox[{"gaussianCore", ",", 
+       RowBox[{"\"\<PeakProbability\>\"", "->", "peakFrequencyProbability"}], 
+       ",", 
+       RowBox[{"\"\<PeakAmplification\>\"", "->", 
+        "peakFrequencyAmplification"}], ",", 
+       RowBox[{"\"\<EventSeed\>\"", "->", "peakFrequencyEventSeed"}]}], 
+      "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.9959475716323957`*^9, 3.99594828512145*^9, {3.995948526024926*^9, 
+   3.995948528331192*^9}, {3.995948576261467*^9, 3.995948577163814*^9}, {
+   3.995948905235352*^9, 3.995948911205739*^9}, {3.995950309194845*^9, 
+   3.995950322491527*^9}, {3.995950388786633*^9, 
+   3.995950406583309*^9}},ExpressionUUID->"b19a15c7-1cfa-43e7-88cd-\
+25eeddae9adf"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.995950334325983*^9, 3.995950335678052*^9}, 
+   3.9959504044770184`*^9},ExpressionUUID->"06646289-0d99-479a-a1b6-\
+c7cae2d6428f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Market", " ", "adapter", " ", "for", " ", "a", " ", "higher", " ", 
+    "number", " ", "of", " ", "peaks"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"peakFrequencyMarketBase", "=", 
+     RowBox[{"GaussianMarketAdapter", "[", 
+      RowBox[{"peakFrequencyCore", ",", 
+       RowBox[{"\"\<InitialPrice\>\"", "->", "100."}], ",", 
+       RowBox[{"\"\<AnnualizedVolatility\>\"", "->", "0.20"}]}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{"peakFrequencyRelativeScale", "=", 
+     RowBox[{"peakFrequencyCore", "[", "\"\<ConditionalScale\>\"", "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"peakFrequencyPeriodScale", "=", 
+     RowBox[{
+      RowBox[{
+      "peakFrequencyMarketBase", "[", "\"\<MarketParameters\>\"", "]"}], 
+      "[", "\"\<PeriodScale\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"peakFrequencyResult", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{"peakFrequencyMarketBase", ",", 
+       RowBox[{"<|", 
+        RowBox[{
+         RowBox[{"\"\<Volatility\>\"", "->", 
+          RowBox[{
+          "peakFrequencyPeriodScale", " ", "peakFrequencyRelativeScale"}]}], ",", 
+         RowBox[{"\"\<RelativeVolatility\>\"", "->", 
+          "peakFrequencyRelativeScale"}]}], "|>"}]}], "]"}]}], 
     ";"}]}]}]], "Input",
- CellChangeTimes->{3.9959475716323957`*^9, 
-  3.99594828512145*^9},ExpressionUUID->"b19a15c7-1cfa-43e7-88cd-25eeddae9adf"]
+ CellChangeTimes->{{3.9959503413682327`*^9, 3.9959503458235598`*^9}, {
+  3.9959504106221647`*^9, 
+  3.99595042959239*^9}},ExpressionUUID->"ad1df459-19c4-4a1a-93fd-\
+6309aa388f60"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Construction", " ", "Summary", " ", "so", " ", "far"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"peakFrequencyConstructionSummary", "=", 
+     RowBox[{"<|", 
+      RowBox[{
+       RowBox[{"\"\<Observations\>\"", "->", 
+        RowBox[{"peakFrequencyCore", "[", "\"\<Length\>\"", "]"}]}], ",", 
+       RowBox[{"\"\<ExpectedPeakCount\>\"", "->", 
+        RowBox[{"peakFrequencyProbability", " ", 
+         RowBox[{"peakFrequencyCore", "[", "\"\<Length\>\"", "]"}]}]}], ",", 
+       RowBox[{"\"\<RealizedPeakCount\>\"", "->", 
+        RowBox[{"Total", "[", 
+         RowBox[{"peakFrequencyCore", "[", "\"\<PeakIndicator\>\"", "]"}], 
+         "]"}]}], ",", 
+       RowBox[{"\"\<RealizedPeakFrequency\>\"", "->", 
+        RowBox[{"Mean", "[", 
+         RowBox[{"peakFrequencyCore", "[", "\"\<PeakIndicator\>\"", "]"}], 
+         "]"}]}], ",", 
+       RowBox[{"\"\<PeakAmplification\>\"", "->", 
+        "peakFrequencyAmplification"}], ",", 
+       RowBox[{"\"\<TheoreticalSignalVariance\>\"", "->", 
+        RowBox[{
+         RowBox[{"peakFrequencyCore", "[", "\"\<Parameters\>\"", "]"}], 
+         "[", "\"\<TheoreticalSignalVariance\>\"", "]"}]}]}], "|>"}]}], ";"}],
+    "\n", 
+   RowBox[{"Dataset", "[", "peakFrequencyConstructionSummary", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.995950352397182*^9, 3.995950352842763*^9}, {
+  3.995950436231422*^9, 
+  3.995950446699429*^9}},ExpressionUUID->"56b4fc35-66f9-405f-a7d6-\
+059e2d45986b"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+  "Visual", " ", "Comparison", " ", "with", " ", "original", " ", "and", " ", 
+   "a", " ", "higher", " ", "number", " ", "of", " ", "peak", " ", 
+   "frequency"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.99595045272328*^9, 
+  3.995950470805148*^9}},ExpressionUUID->"07bdc092-910c-408d-a16b-\
+95bb89102b18"]
 },
 WindowSize->{1158, 723.75},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -238,10 +482,14 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[554, 20, 3240, 78, 255, "Input",ExpressionUUID->"87890b96-1199-448b-9a75-cdfd6f86572f"],
-Cell[3797, 100, 205, 4, 69, "Input",ExpressionUUID->"7b259192-4ef2-446a-a7db-9f748aeb0cc0"],
-Cell[4005, 106, 4335, 98, 329, "Input",ExpressionUUID->"333cdbde-26d7-4e6a-8b6b-dda0b177f941"],
-Cell[8343, 206, 624, 15, 69, "Input",ExpressionUUID->"b19a15c7-1cfa-43e7-88cd-25eeddae9adf"]
+Cell[554, 20, 3258, 77, 229, "Input",ExpressionUUID->"87890b96-1199-448b-9a75-cdfd6f86572f"],
+Cell[3815, 99, 174, 3, 29, "Input",ExpressionUUID->"7b259192-4ef2-446a-a7db-9f748aeb0cc0"],
+Cell[3992, 104, 4336, 98, 329, "Input",ExpressionUUID->"333cdbde-26d7-4e6a-8b6b-dda0b177f941"],
+Cell[8331, 204, 7456, 168, 690, "Input",ExpressionUUID->"b19a15c7-1cfa-43e7-88cd-25eeddae9adf"],
+Cell[15790, 374, 177, 3, 29, "Input",ExpressionUUID->"06646289-0d99-479a-a1b6-c7cae2d6428f"],
+Cell[15970, 379, 1548, 39, 149, "Input",ExpressionUUID->"ad1df459-19c4-4a1a-93fd-6309aa388f60"],
+Cell[17521, 420, 1567, 35, 189, "Input",ExpressionUUID->"56b4fc35-66f9-405f-a7d6-059e2d45986b"],
+Cell[19091, 457, 348, 8, 29, "Input",ExpressionUUID->"07bdc092-910c-408d-a16b-95bb89102b18"]
 }
 ]
 *)
